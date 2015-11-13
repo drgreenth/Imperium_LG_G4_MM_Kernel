@@ -392,18 +392,6 @@ static int tz_stop(struct devfreq *devfreq)
 	return 0;
 }
 
-static int tz_resume(struct devfreq *devfreq)
-{
-	struct devfreq_dev_profile *profile = devfreq->profile;
-	unsigned long freq;
-
-	suspended = false;
-
-	freq = profile->initial_freq;
-
-	return profile->target(devfreq->dev.parent, &freq, 0);
-}
-
 static int tz_suspend(struct devfreq *devfreq)
 {
 	struct devfreq_msm_adreno_tz_data *priv = devfreq->data;
@@ -440,9 +428,6 @@ static int tz_handler(struct devfreq *devfreq, unsigned int event, void *data)
 		break;
 
 	case DEVFREQ_GOV_RESUME:
-		result = tz_resume(devfreq);
-		break;
-
 	case DEVFREQ_GOV_INTERVAL:
 		/* ignored, this governor doesn't use polling */
 	default:
