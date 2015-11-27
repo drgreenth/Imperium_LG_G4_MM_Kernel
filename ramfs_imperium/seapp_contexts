@@ -14,6 +14,7 @@ user=_app seinfo=media name=com.lge.acms domain=system_app type=system_app_data_
 user=_app seinfo=platform name=com.android.mms domain=system_app type=system_app_data_file
 user=_app seinfo=platform name=com.android.systemui domain=system_app type=system_app_data_file
 user=_app seinfo=platform name=com.android.systemui:screenshot domain=system_app type=system_app_data_file
+user=_app seinfo=platform name=com.lge.launcher2 domain=system_app type=system_app_data_file
 user=_app seinfo=platform name=com.lge.oneseg domain=system_app type=system_app_data_file
 user=_app seinfo=platform name=com.lge.sepolicyupdater domain=system_app type=system_app_data_file
 user=_app seinfo=release name=com.android.gallery3d domain=system_app type=system_app_data_file

@@ -141,10 +141,10 @@
 /system/bin/bootanimation u:object_r:bootanim_exec:s0
 /system/bin/app_process_init    u:object_r:system_file:s0
 /system/bin/app_process    u:object_r:system_file:s0
-#/system/bin/app_process32	u:object_r:zygote_exec:s0
+/system/bin/app_process32	u:object_r:zygote_exec:s0
 /system/bin/app_process32_original    u:object_r:zygote_exec:s0
 /system/bin/app_process32_xposed    u:object_r:zygote_exec:s0
-#/system/bin/app_process64	u:object_r:zygote_exec:s0
+/system/bin/app_process64	u:object_r:zygote_exec:s0
 /system/bin/servicemanager	u:object_r:servicemanager_exec:s0
 /system/bin/surfaceflinger	u:object_r:surfaceflinger_exec:s0
 /system/bin/drmserver	u:object_r:drmserver_exec:s0
@@ -181,6 +181,7 @@
 /system/bin/uncrypt     u:object_r:uncrypt_exec:s0
 /system/bin/logwrapper  u:object_r:system_file:s0
 /system/bin/vdc         u:object_r:vdc_exec:s0
+/system/bin/install-recovery.sh u:object_r:install_recovery_exec:s0
 /system/bin/install-recovery_original.sh u:object_r:install_recovery_exec:s0
 /system/bin/dex2oat     u:object_r:dex2oat_exec:s0
 # patchoat executable has (essentially) the same requirements as dex2oat.
@@ -727,6 +728,7 @@
 /dev/block/platform/.*/by-name/carrier        u:object_r:carrier_block_device:s0
 /dev/block/platform/.*/by-name/cust         u:object_r:cust_block_device:s0
 /dev/block/platform/.*/by-name/drm          u:object_r:drm_block_device:s0
+/dev/block/platform/.*/by-name/dsp          u:object_r:dsp_block_device:s0
 /dev/block/platform/.*/by-name/eksst        u:object_r:eksst_block_device:s0
 /dev/block/platform/.*/by-name/encrypt      u:object_r:encrypt_block_device:s0
 /dev/block/platform/.*/by-name/fsc          u:object_r:fsc_block_device:s0
@@ -746,6 +748,7 @@
 /dev/block/platform/.*/by-name/sbl1              u:object_r:sbl1_block_device:s0
 /dev/block/platform/.*/by-name/sec          u:object_r:sec_block_device:s0
 /dev/block/platform/.*/by-name/sns          u:object_r:sns_block_device:s0
+/dev/block/platform/.*/by-name/spare1       u:object_r:frp_block_device:s0
 /dev/block/platform/.*/by-name/ssd          u:object_r:ssd_block_device:s0
 /dev/block/platform/.*/by-name/system       u:object_r:system_block_device:s0
 /dev/block/platform/.*/by-name/tz                u:object_r:tz_block_device:s0
@@ -809,6 +812,7 @@
 /system/bin/advanced_moca            u:object_r:moca_exec:s0
 /system/bin/dhcp6c                 u:object_r:dhcp6c_exec:s0
 /system/bin/ml_daemon                u:object_r:ml_daemon_exec:s0
+/system/bin/thermal-engine           u:object_r:thermal-engine_exec:s0
 /system/bin/voqas                    u:object_r:moca_exec:s0
 /system/etc/wide-dhcpv6/dhcp6c.script            u:object_r:dhcp6c_script_exec:s0
 ###

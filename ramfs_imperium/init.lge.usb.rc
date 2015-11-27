@@ -102,12 +102,12 @@ on post-fs-data
     chown system system /sys/devices/platform/lg_diag_cmd/diag_enable
     chmod 0660 /sys/devices/platform/lg_diag_cmd/diag_enable
 
-on property:persist.sys.usb.diag_enable=*
-    write /sys/devices/platform/lg_diag_cmd/diag_enable ${persist.sys.usb.diag_enable}
-
 ################################################################################
 # COMMON
 ################################################################################
+
+on property:persist.sys.usb.diag_enable=*
+    write /sys/devices/platform/lg_diag_cmd/diag_enable ${persist.sys.usb.diag_enable}
 
 # adb
 on property:sys.usb.config=adb

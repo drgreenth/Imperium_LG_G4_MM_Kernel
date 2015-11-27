@@ -79,6 +79,13 @@ on post-fs-data
     chown system system /sys/class/power_supply/battery/safety_timer
     chown system system /sys/class/power_supply/battery/safety_timer_enabled
 
+	# LGE_CHANGE_S, [display] feature : SP MIRRORING
+	chmod 0660 /sys/class/graphics/fb0/sp_link_backlight_off
+	chown system system /sys/class/graphics/fb0/sp_link_backlight_off
+	chmod 0660 /sys/devices/virtual/input/lge_touch/sp_link_touch_off
+	chown system system /sys/devices/virtual/input/lge_touch/sp_link_touch_off
+	# LGE_CHANGE_E, [display] feature : SP MIRRORING
+
     # CAPP_INTEGRITY, LGIS [lge-is-dev@lge.com]
     mkdir /data/system/lgis 0700 system system
 
@@ -176,17 +183,19 @@ on property:vold.post_fs_data_done=1
     start enable_uninstall
 
 #CAPP_LOGCATCHER
-service digicl /system/bin/digicl.sh
+service digicl /system/bin/sh /system/bin/digicl.sh
     class main
     disabled
     oneshot
+    seclabel u:r:digicl:s0
 
 #CAPP_LOGCATCHER
-service quickdump /system/bin/quickdump.sh
+service quickdump /system/bin/sh /system/bin/quickdump.sh
     class main
     disabled
     oneshot
     ioprio rt 0
+    seclabel u:r:quickdump:s0
 
 #CAPP_NFS
 service nfskill /system/bin/nfskillprocess
@@ -327,3 +336,13 @@ service ccmd /system/bin/ccmd
     group system
     socket ccmd stream 0660 root system
     seclabel u:r:ccmd:s0
+
+# LGE_CHANGE_S, [display] feature : SP MIRRORING
+on property:com.lge.splink_screen_off=0
+    write /sys/class/graphics/fb0/sp_link_backlight_off 0
+    write /sys/devices/virtual/input/lge_touch/sp_link_touch_off 0
+
+on property:com.lge.splink_screen_off=1
+    write /sys/class/graphics/fb0/sp_link_backlight_off 1
+    write /sys/devices/virtual/input/lge_touch/sp_link_touch_off 1
+# LGE_CHANGE_E, [display] feature : SP MIRRORING

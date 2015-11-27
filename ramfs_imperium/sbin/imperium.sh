@@ -35,14 +35,7 @@ cd /;
 $BB cp /sbin/busybox /system/xbin/;
 
 /system/xbin/busybox --install -s /system/xbin/
-if [ -e /system/xbin/wget ]; then
-	rm /system/xbin/wget;
-fi;
-if [ -e /system/wget/wget ]; then
-	chmod 755 /system/wget/wget;
-	ln -s /system/wget/wget /system/xbin/wget;
-fi;
-chmod 06755 /system/xbin/busybox;
+$BB chmod 06755 /system/xbin/busybox
 if [ -e /system/xbin/su ]; then
 	$BB chmod 06755 /system/xbin/su;
 fi;
@@ -84,17 +77,14 @@ OPEN_RW;
 CRITICAL_PERM_FIX()
 {
 	# critical Permissions fix
-	$BB chown -R system:system /data/anr;
-	$BB chown -R root:root /data/property;
 	$BB chown -R root:root /tmp;
 	$BB chown -R root:root /res;
 	$BB chown -R root:root /sbin;
 	$BB chown -R root:root /lib;
 	$BB chmod -R 777 /tmp/;
 	$BB chmod -R 775 /res/;
-	$BB chmod -R 0775 /data/anr/;
-	$BB chmod -R 0700 /data/property;
-	$BB chmod -R 0771 /data/tombstones;
+	$BB chmod 06755 /sbin/busybox;
+	$BB chmod 06755 /system/xbin/busybox;
 }
 CRITICAL_PERM_FIX;
 
@@ -110,7 +100,7 @@ setprop persist.service.btui.use_aptx 1
 # Fix critical perms again after init.d mess
 	CRITICAL_PERM_FIX;
 	
-sleep 2;
+sleep 1;
 
 # script finish here, so let me know when
 rm /data/local/tmp/Imperium_LL_Kernel

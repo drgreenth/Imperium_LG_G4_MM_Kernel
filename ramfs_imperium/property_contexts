@@ -146,6 +146,7 @@ net.ims.country  u:object_r:net_radio_prop:s0
 
 # dumprepoter_prop
 ctl.Aat_result         u:object_r:minios_prop:s0
+ctl.digicl    u:object_r:ctl_digicl_prop:s0
 ctl.dumpreporter          u:object_r:ctl_dumpreporter_prop:s0
 ctl.decryptwipe           u:object_r:ctl_decryptwipe_prop:s0
 ctl.ipsecclient                 u:object_r:ctl_ipsec_prop:s0
@@ -163,6 +164,7 @@ ctl.minios3_thermal    u:object_r:minios_prop:s0
 ctl.mtk_selfd                    u:object_r:minios_prop:s0
 ctl.ppd                   u:object_r:ppd_prop:s0
 ctl.qrngp      u:object_r:minios_prop:s0
+ctl.quickdump    u:object_r:ctl_quickdump_prop:s0
 ctl.rfs_access    u:object_r:ctl_rfs_access_prop:s0
 ctl.ril-minios u:object_r:minios_prop:s0
 ctl.rmt_storage    u:object_r:ctl_rmt_storage_prop:s0
@@ -317,6 +319,7 @@ usb_uicc.enabled                 u:object_r:uicc_prop:s0
 # Etc qcom property
 ctl.dpmd                         u:object_r:ctl_dpmd_prop:s0
 ctl.sdcard                       u:object_r:ctl_fuse_prop:s0
+ctl.RIDL                         u:object_r:ctl_ridl_prop:s0
 mobicore.tbase.loaded            u:object_r:mobicore_prop:s0
 persist.lge.att.remove           u:object_r:wfd_prop:s0
 qc.sdk.us.digitalpen             u:object_r:qualcomm_digitalpen_prop:s0

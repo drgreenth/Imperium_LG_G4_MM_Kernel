@@ -35,8 +35,8 @@ on early-init
     insmod /sbin/qdrbg_module.ko
 
 # TODO: This MUST be disabled not use 'sdcard' in LGE device.
-#on init
-#    start qfintverify
+on init
+    start qfintverify
 #    # Set permissions for persist partition
 #    mkdir /persist 0771 system system
 #
@@ -294,11 +294,11 @@ on post-fs-data
     chmod 2770 /data/system/perfd
 
 # TODO: This MUST be disabled not use 'qcom system daemon' in LGE platform.
-#service qfintverify /sbin/qfintverify
-#    user root
-#    class core
-#    seclabel u:r:qfips:s0
-#    oneshot
+service qfintverify /sbin/qfintverify
+    user root
+    class core
+    seclabel u:r:qfips:s0
+    oneshot
 
 # TODO: This MUST be disabled not use 'qcom system daemon' in LGE platform.
 #service qcomsysd /system/bin/qcom-system-daemon
