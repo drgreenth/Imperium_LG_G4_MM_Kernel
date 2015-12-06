@@ -73,5 +73,6 @@ obj-$(CONFIG_ARCH_MSM8974) += msm_mpmctr.o
 
 obj-$(CONFIG_PERFMAP) += perfmap.o
 obj-$(CONFIG_ZEN_DECISION)    += msm_zen_decision.o
+obj-$(CONFIG_MSM_LIMITER) += msm_limiter.o
 obj-$(CONFIG_MSM_SLEEPER) += msm_sleeper.o
 obj-$(CONFIG_FORCE_FAST_CHARGE) += fastchg.o
