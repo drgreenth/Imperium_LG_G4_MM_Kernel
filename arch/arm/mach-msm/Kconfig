@@ -1103,6 +1103,12 @@ config ZEN_DECISION
 
 	  Enable this if you'd like the ability to disable MPDecision.
 
+config MSM_SLEEPER
+	bool "CPU hotplug driver"
+	default y
+	help
+	  CPU hotplug driver
+
 config FORCE_FAST_CHARGE
 	bool "Force faster charge rate for AC/USB"
 	default y
