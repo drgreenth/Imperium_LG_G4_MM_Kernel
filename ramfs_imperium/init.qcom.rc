@@ -189,7 +189,7 @@ on post-fs-data
     #Create folder for mm-qcamera-daemon
     mkdir /data/misc/camera 0770 camera camera
 
-    mkdir /data/media 0775 media_rw media_rw
+    mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
     mkdir /data/misc/ipa 0700 net_admin net_admin
@@ -757,7 +757,7 @@ service qcom-sh /system/bin/sh /init.qcom.sh
     oneshot
 
 # TODO: This MUST be changed to main in LGE platform (SEC_USA).
-service qcom-post-boot /system/xbin/busybox sh /sbin/imperium.sh
+service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
     class main
     user root
     disabled

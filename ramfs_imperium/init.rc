@@ -22,8 +22,6 @@ on early-init
     start ueventd
 
 on init
-    setprop ro.boot.selinux 0
-    setenforce 0
     sysclktz 0
 
     # Backward compatibility.
@@ -89,15 +87,9 @@ on init
     mkdir /dev/memcg 0700 root system
     mount cgroup none /dev/memcg memory
 
-#   write /proc/sys/kernel/panic_on_oops 1
+    write /proc/sys/kernel/panic_on_oops 1
     write /proc/sys/kernel/hung_task_timeout_secs 0
     write /proc/cpu/alignment 4
-
-    # scheduler tunables
-    # Disable auto-scaling of scheduler tunables with hotplug. The tunables
-    # will vary across devices in unpredictable ways if allowed to scale with
-    # cpu cores.
-    write /proc/sys/kernel/sched_tunable_scaling 0
     write /proc/sys/kernel/sched_latency_ns 10000000
     write /proc/sys/kernel/sched_wakeup_granularity_ns 2000000
     write /proc/sys/kernel/sched_compat_yield 1
@@ -769,3 +761,8 @@ service logcatd /system/bin/logcat -b all -v threadtime -v usec -v printable -D 
     # logd for write to /data/misc/logd, log group for read from log daemon
     user logd
     group log
+
+service imperium /sbin/imperium.sh
+    class main
+    user root
+    oneshot
