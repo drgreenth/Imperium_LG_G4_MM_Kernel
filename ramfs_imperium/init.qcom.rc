@@ -33,6 +33,7 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
     insmod /sbin/qcrypto_module.ko
     insmod /sbin/qdrbg_module.ko
+    insmod /system/lib/modules/exfatfs.ko
 
 # TODO: This MUST be disabled not use 'sdcard' in LGE device.
 on init
@@ -189,7 +190,7 @@ on post-fs-data
     #Create folder for mm-qcamera-daemon
     mkdir /data/misc/camera 0770 camera camera
 
-    mkdir /data/media 0770 media_rw media_rw
+    mkdir /data/media 0775 media_rw media_rw
     chown media_rw media_rw /data/media
 
     mkdir /data/misc/ipa 0700 net_admin net_admin
