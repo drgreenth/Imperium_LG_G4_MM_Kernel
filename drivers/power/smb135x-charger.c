@@ -28,13 +28,12 @@
 #include <linux/regulator/of_regulator.h>
 #include <linux/regulator/machine.h>
 #include <linux/pinctrl/consumer.h>
+#ifdef CONFIG_FORCE_FAST_CHARGE
+#include <linux/fastcharge.h>
+#endif
 
 #ifdef CONFIG_LGE_PM_FACTORY_PSEUDO_BATTERY
 #include <soc/qcom/lge/board_lge.h>
-#endif
-
-#ifdef CONFIG_FORCE_FAST_CHARGE
-#include <linux/fastcharge.h>
 #endif
 #define SMB135X_BITS_PER_REG	8
 
@@ -1213,10 +1212,6 @@ static int smb135x_set_high_usb_chg_current(struct smb135x_chg *chip,
 	return rc;
 }
 
-#ifdef CONFIG_FORCE_FAST_CHARGE
-extern int force_fast_charge;
-#endif
-
 #define MAX_VERSION			0xF
 #define USB_100_PROBLEM_VERSION		0x2
 /* if APSD results are used
@@ -1275,12 +1270,12 @@ static int smb135x_set_usb_chg_current(struct smb135x_chg *chip,
 #ifdef CONFIG_LGE_PM_PARALLEL_CHARGING
 #else
 	if (current_ma == CURRENT_500_MA) {
-
 #ifdef CONFIG_FORCE_FAST_CHARGE
-		rc = smb135x_masked_write(chip, CFG_5_REG, USB_2_3_BIT, USB_2_3_BIT);
-#else
-		rc = smb135x_masked_write(chip, CFG_5_REG, USB_2_3_BIT, 0);
+		if (force_fast_charge)
+			rc = smb135x_masked_write(chip, CFG_5_REG, USB_2_3_BIT, USB_2_3_BIT);
+		else
 #endif
+			rc = smb135x_masked_write(chip, CFG_5_REG, USB_2_3_BIT, 0);
 		rc |= smb135x_masked_write(chip, CMD_INPUT_LIMIT,
 				USB_100_500_AC_MASK, USB_500_VAL);
 		rc |= smb135x_path_suspend(chip, USB, CURRENT, false);
@@ -2232,10 +2227,11 @@ static void smb135x_external_power_changed(struct power_supply *psy)
 	if (chip->usb_psy_ma != current_limit) {
 		mutex_lock(&chip->current_change_lock);
 #ifdef CONFIG_FORCE_FAST_CHARGE
-		chip->usb_psy_ma = 1600;
-#else
-		chip->usb_psy_ma = current_limit;
+		if (force_fast_charge)
+			chip->usb_psy_ma = 900;
+		else
 #endif
+			chip->usb_psy_ma = current_limit;
 		rc = smb135x_set_appropriate_current(chip, USB);
 		mutex_unlock(&chip->current_change_lock);
 		if (rc < 0)
