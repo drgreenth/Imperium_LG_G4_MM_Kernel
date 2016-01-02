@@ -12,7 +12,7 @@ KERNELDIR="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel"
 BUILDEDKERNEL="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel/1_Imperium"
 IMAGE="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel/arch/arm64/boot"
 RAMFS="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_ramdisk"
-VERSION=1.0
+VERSION=1.1
 
 rm -f arch/arm64/boot/*.cmd
 rm -f arch/arm64/boot/dts/*.cmd
