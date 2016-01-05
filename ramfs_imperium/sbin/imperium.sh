@@ -58,6 +58,12 @@ pm enable com.google.android.gsf/.update.SystemUpdateService
 pm enable com.google.android.gsf/.update.SystemUpdateService$Receiver
 pm enable com.google.android.gsf/.update.SystemUpdateService$SecretCodeReceiver
 
+# Turn off debugging for certain modules
+echo 0 > /sys/module/lowmemorykiller/parameters/debug_level
+echo 0 > /sys/module/alarm_dev/parameters/debug_mask
+echo 0 > /sys/module/xt_qtaguid/parameters/debug_mask
+
+
 # Script finish here
 rm /data/local/tmp/Imperium_Kernel
 touch /data/local/tmp/Imperium_Kernel
