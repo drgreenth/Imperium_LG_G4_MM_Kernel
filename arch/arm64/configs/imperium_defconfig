@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 3.10.94-Imperium Kernel v1.1 Kernel Configuration
+# Linux/arm64 3.10.94-Imperium Kernel v1.2 Kernel Configuration
 #
 CONFIG_ARM64=y
 CONFIG_64BIT=y
@@ -38,7 +38,7 @@ CONFIG_SOUND_CONTROL_HAX_3_GPL=y
 CONFIG_FORCE_FAST_CHARGE=y
 CONFIG_INIT_ENV_ARG_LIMIT=32
 CONFIG_CROSS_COMPILE=""
-CONFIG_LOCALVERSION="-Imperium-Kernel-G4-v1.1"
+CONFIG_LOCALVERSION="-Imperium-Kernel-G4-v1.2"
 # CONFIG_LOCALVERSION_AUTO is not set
 CONFIG_DEFAULT_HOSTNAME="(none)"
 CONFIG_SWAP=y
