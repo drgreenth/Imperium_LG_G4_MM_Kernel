@@ -8,25 +8,18 @@ export CROSS_COMPILE=aarch64-none-elf-
 export TARGET_PREBUILT_KERNEL=/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel/arch/arm64/boot/Image.gz-dtb
 export KCONFIG_NOTIMESTAMP=true
 
+IMPERIUM="/home/slim80/Scrivania/kernel/LG/Imperium"
 KERNELDIR="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel"
 BUILDEDKERNEL="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel/1_Imperium"
 IMAGE="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel/arch/arm64/boot"
 RAMFS="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_ramdisk"
 VERSION=1.2
 
-rm -f arch/arm64/boot/*.cmd
-rm -f arch/arm64/boot/dts/*.cmd
-rm -f arch/arm64/boot/Image*.*
-rm -f arch/arm64/boot/.Image*.*
 find -name '*.dtb' -exec rm -rf {} \;
 find -name '*.ko' -exec rm -rf {} \;
 rm -f $BUILDEDKERNEL/Builded_Kernel/boot.img
 rm -f dt.img
-rm -f ramdisk.gz
-
-make clean
-make distclean
-ccache -C
+rm -f $IMPERIUM/Imperium_ramdisk.cpio.gz
 
 make ARCH=arm64 imperium_defconfig || exit 1
 
@@ -42,9 +35,13 @@ echo $DTBVERCMD
 
 sh ./fix_ramfs_permissions.sh
 
-./scripts/mkbootfs $RAMFS | gzip > ramdisk.gz 2>/dev/null
+cd $RAMFS
+find | fakeroot cpio -H newc -o > $RAMFS.cpio 2>/dev/null
+ls -lh $RAMFS.cpio
+gzip -9 $RAMFS.cpio
+cd $KERNELDIR
 
-./scripts/mkbootimg --kernel $IMAGE/Image --ramdisk ramdisk.gz --base 0x00000000 --pagesize 4096 --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 00000100 --cmdline 'console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 user_debug=31 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.selinux=permissive msm_rtb.filter=0x37 boot_cpus=0-5 androidboot.hardware=p1' --dt dt.img -o $BUILDEDKERNEL/Builded_Kernel/boot.img
+./scripts/mkbootimg --kernel $IMAGE/Image --ramdisk $IMPERIUM/Imperium_ramdisk.cpio.gz --base 0x00000000 --pagesize 4096 --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 00000100 --cmdline 'console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 user_debug=31 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.selinux=permissive msm_rtb.filter=0x37 boot_cpus=0-5 androidboot.hardware=p1' --dt dt.img -o $BUILDEDKERNEL/Builded_Kernel/boot.img
 
 rm -rf imperium_install
 mkdir -p imperium_install
