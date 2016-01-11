@@ -15,6 +15,8 @@ chmod 644 set_emmc_size.sh
 chmod 771 data
 chmod 755 dev
 chmod 555 proc
+chmod 755 res
+chmod 644 res/images/charger/*
 chmod 750 sbin
 chmod 750 sbin/*
 chmod 755 sbin/busybox
