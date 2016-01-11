@@ -13,7 +13,7 @@ KERNELDIR="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel"
 BUILDEDKERNEL="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel/1_Imperium"
 IMAGE="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel/arch/arm64/boot"
 RAMFS="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_ramdisk"
-VERSION=1.2
+VERSION=1.3
 
 find -name '*.dtb' -exec rm -rf {} \;
 find -name '*.ko' -exec rm -rf {} \;
@@ -54,4 +54,4 @@ cd $BUILDEDKERNEL/Builded_Kernel/
 zip -r ../Imperium_Kernel_G4_v$VERSION.zip .
 
 echo "* Done! *"
-echo "* Imperium_Kernel_G4_Kernel_v1.0.zip is ready to be flashad *"
+echo "* Imperium_Kernel_G4_Kernel_v$VERSION.zip is ready to be flashad *"
