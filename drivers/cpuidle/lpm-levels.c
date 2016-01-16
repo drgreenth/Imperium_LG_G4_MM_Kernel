@@ -25,9 +25,12 @@
 #include <linux/tick.h>
 #include <linux/suspend.h>
 #include <linux/pm_qos.h>
+<<<<<<< HEAD
 #ifdef CONFIG_QUICK_WAKEUP
 #include <linux/quickwakeup.h>
 #endif
+=======
+>>>>>>> parent of 07d06c8... add quickwakeup
 #include <linux/of_platform.h>
 #include <linux/smp.h>
 #include <linux/remote_spinlock.h>
@@ -931,9 +934,12 @@ static const struct platform_suspend_ops lpm_suspend_ops = {
 	.valid = suspend_valid_only_mem,
 	.prepare_late = lpm_suspend_prepare,
 	.wake = lpm_suspend_wake,
+<<<<<<< HEAD
 	#ifdef CONFIG_QUICK_WAKEUP
 	.suspend_again = quickwakeup_suspend_again,
 	#endif
+=======
+>>>>>>> parent of 07d06c8... add quickwakeup
 };
 
 static int lpm_probe(struct platform_device *pdev)
