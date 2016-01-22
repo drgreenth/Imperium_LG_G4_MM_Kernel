@@ -36,14 +36,32 @@ $BB rm -rf /cache/lost+found/* 2> /dev/null;
 $BB rm -rf /data/lost+found/* 2> /dev/null;
 $BB rm -rf /data/tombstones/* 2> /dev/null;
 
-# Prop tweaks
+### Improve Battery
+# vm tweaks
+busybox sysctl -e -w vm.oom_dump_tasks=1
+busybox sysctl -e -w vm.oom_kill_allocating_task=1
+busybox sysctl -w vm.laptop_mode=0
+busybox sysctl -w vm.swappiness=90
+busybox sysctl -w vm.vfs_cache_pressure=80
+busybox sysctl -w vm.dirty_expire_centisecs=500
+busybox sysctl -w vm.dirty_writeback_centisecs=3000
+busybox sysctl -w vm.dirty_background_ratio=5
+busybox sysctl -w vm.dirty_ratio=10
+
+# setprop
 setprop persist.adb.notify 0
 setprop persist.service.adb.enable 1
 setprop pm.sleep_mode 1
 setprop logcat.live disable
 setprop profiler.force_disable_ulog 1
-setprop ro.ril.disable.power.collapse 0
 setprop persist.service.btui.use_aptx 1
+setprop persist.radio.add_power_save 1
+setprop ro.ril.power_collapse 0
+setprop ro.ril.disable.power.collapse 1
+setprop wifi.supplicant_scan_interval 320
+setprop power_supply.wakeup enable
+setprop power.saving.mode 1
+setprop ro.config.hw_power_saving 1
 
 # Google Services battery drain fixer by Alcolawl@xda
 # http://forum.xda-developers.com/google-nexus-5/general/script-google-play-services-battery-t3059585/post59563859
@@ -59,10 +77,14 @@ pm enable com.google.android.gsf/.update.SystemUpdateService$Receiver
 pm enable com.google.android.gsf/.update.SystemUpdateService$SecretCodeReceiver
 
 # Turn off debugging for certain modules
+busybox chmod 644 /sys/module/lowmemorykiller/parameters/debug_level
 echo 0 > /sys/module/lowmemorykiller/parameters/debug_level
+busybox chmod 644 /sys/module/alarm_dev/parameters/debug_mask
 echo 0 > /sys/module/alarm_dev/parameters/debug_mask
+busybox chmod 644 /sys/module/ipc_router_core/parameters/debug_mask
+echo 0 > /sys/module/ipc_router_core/parameters/debug_mask
+busybox chmod 644 /sys/module/xt_qtaguid/parameters/debug_mask
 echo 0 > /sys/module/xt_qtaguid/parameters/debug_mask
-
 
 # Script finish here
 rm /data/local/tmp/Imperium_Kernel
