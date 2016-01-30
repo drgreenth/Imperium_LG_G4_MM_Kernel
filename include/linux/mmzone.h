@@ -156,7 +156,6 @@ enum zone_stat_item {
 #ifdef CONFIG_PAGE_USAGE
 	NR_USE_PAGES,
 #endif
-	NR_SWAPCACHE,
 	NR_VM_ZONE_STAT_ITEMS };
 
 /*
