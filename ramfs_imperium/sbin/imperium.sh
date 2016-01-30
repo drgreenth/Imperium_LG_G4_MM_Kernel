@@ -38,13 +38,9 @@ $BB rm -rf /data/tombstones/* 2> /dev/null;
 
 ### Improve Battery
 # vm tweaks
-busybox sysctl -e -w vm.oom_dump_tasks=1
-busybox sysctl -e -w vm.oom_kill_allocating_task=1
 busybox sysctl -w vm.laptop_mode=0
-busybox sysctl -w vm.swappiness=90
-busybox sysctl -w vm.vfs_cache_pressure=80
-busybox sysctl -w vm.dirty_expire_centisecs=500
-busybox sysctl -w vm.dirty_writeback_centisecs=3000
+busybox sysctl -w vm.swappiness=0
+busybox sysctl -w vm.vfs_cache_pressure=70
 busybox sysctl -w vm.dirty_background_ratio=5
 busybox sysctl -w vm.dirty_ratio=10
 
@@ -55,9 +51,6 @@ setprop pm.sleep_mode 1
 setprop logcat.live disable
 setprop profiler.force_disable_ulog 1
 setprop persist.service.btui.use_aptx 1
-setprop persist.radio.add_power_save 1
-setprop ro.ril.power_collapse 0
-setprop ro.ril.disable.power.collapse 1
 setprop wifi.supplicant_scan_interval 320
 setprop power_supply.wakeup enable
 setprop power.saving.mode 1
