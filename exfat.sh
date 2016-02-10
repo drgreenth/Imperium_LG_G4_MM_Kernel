@@ -3,13 +3,13 @@ export KERNELDIR=`readlink -f .`
 export PARENT_DIR=`readlink -f ..`
 export ARCH=arm64
 export SUBARCH=arm64
-export PATH=/home/slim80/Scrivania/kernel/Compilatori/aarch64-linux-android-4.9/bin:$PATH
+export PATH=/home/slim80/Scrivania/Kernel/Compilatori/aarch64-linux-android-4.9/bin:$PATH
 export CROSS_COMPILE=aarch64-linux-android-
 
-IMPERIUM="/home/slim80/Scrivania/kernel/LG/Imperium"
-EXFAT="/home/slim80/Scrivania/kernel/LG/Imperium/exfat"
-KERNELDIR="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel"
-BUILDEDKERNEL="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel/1_Imperium"
+IMPERIUM="/home/slim80/Scrivania/Kernel/LG/Imperium"
+EXFAT="/home/slim80/Scrivania/Kernel/LG/Imperium/exfat"
+KERNELDIR="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_Kernel"
+BUILDEDKERNEL="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_Kernel/1_Imperium"
 
 rm -f $BUILDEDKERNEL/Builded_Kernel/system/lib/modules/texfat.ko
 cp -f tuxera_update.sh $IMPERIUM

@@ -3,17 +3,17 @@ export KERNELDIR=`readlink -f .`
 export PARENT_DIR=`readlink -f ..`
 export ARCH=arm64
 export SUBARCH=arm64
-export PATH=/home/slim80/Scrivania/kernel/Compilatori/aarch64-linux-android-4.9/bin:$PATH
+export PATH=/home/slim80/Scrivania/Kernel/Compilatori/aarch64-linux-android-4.9/bin:$PATH
 export CROSS_COMPILE=aarch64-linux-android-
-export TARGET_PREBUILT_KERNEL=/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel/arch/arm64/boot/Image.gz-dtb
+export TARGET_PREBUILT_KERNEL=/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_Kernel/arch/arm64/boot/Image.gz-dtb
 export KCONFIG_NOTIMESTAMP=true
 
-IMPERIUM="/home/slim80/Scrivania/kernel/LG/Imperium"
-KERNELDIR="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel"
-BUILDEDKERNEL="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel/1_Imperium"
-IMAGE="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_Kernel/arch/arm64/boot"
-RAMFS="/home/slim80/Scrivania/kernel/LG/Imperium/Imperium_ramdisk"
-VERSION=1.6
+IMPERIUM="/home/slim80/Scrivania/Kernel/LG/Imperium"
+KERNELDIR="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_Kernel"
+BUILDEDKERNEL="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_Kernel/1_Imperium"
+IMAGE="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_Kernel/arch/arm64/boot"
+RAMFS="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_ramdisk"
+VERSION=1.8
 
 find -name '*.dtb' -exec rm -rf {} \;
 find -name '*.ko' -exec rm -rf {} \;
