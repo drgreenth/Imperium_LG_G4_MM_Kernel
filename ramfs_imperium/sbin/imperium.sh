@@ -21,12 +21,10 @@ fi;
 # Fixing ROOT
 /system/xbin/daemonsu --auto-daemon &
 
-# Creating init.d folder if missing
-if [ ! -e /system/etc/init.d ]; then
-	mkdir /system/etc/init.d
-	chown -R root.root /system/etc/init.d
-	chmod -R 755 /system/etc/init.d
-fi;
+# Fix init.d folder permissions
+$BB chown -R root.root /system/etc/init.d
+$BB chmod -R 755 /system/etc/init.d
+$BB chmod 755 /system/etc/init.d/*
 
 # Start script in init.d folder
 $BB run-parts /system/etc/init.d/
