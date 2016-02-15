@@ -21,7 +21,8 @@ find -name '*.dtb' -exec rm -rf {} \;
 find -name '*.ko' -exec rm -rf {} \;
 rm -f $BUILDEDKERNEL/Builded_Kernel/boot.img
 rm -f dt.img
-rm -f $IMPERIUM/Imperium_ramdisk.cpio.gz
+rm -f $IMPERIUM/Imperium_ramdisk_H811.cpio.gz
+rm -f $IMPERIUM/Imperium_ramdisk_H815.cpio.gz
 
 make clean
 make distclean
