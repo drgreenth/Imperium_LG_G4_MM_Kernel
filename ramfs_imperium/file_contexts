@@ -530,6 +530,7 @@
 /data/mtslog(/.*)?                    u:object_r:mtslog_data_file:s0
 /data/mtslogsave_98.zip               u:object_r:mtslog_data_file:s0
 /data/mtslogsave_99.zip               u:object_r:mtslog_data_file:s0
+/data/nvdump(/.*)?                   u:object_r:nvdump_data_file:s0
 /data/pfm(/.*)?                    u:object_r:pfm_data_file:s0
 /data/playready(/.*)?           u:object_r:playready_data_file:s0
 /data/preload(/.*)?             u:object_r:apk_data_file:s0

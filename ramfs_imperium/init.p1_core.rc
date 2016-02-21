@@ -195,3 +195,44 @@ on property:ril.lge.touch.callstate=1
 on property:ril.lge.touch.callstate=2
 	write /sys/devices/virtual/input/lge_touch/incoming_call 2
 
+service chmod_dp /system/bin/sh /system/etc/change_permission_preload.sh
+    disabled
+    oneshot
+# Enable CC Audit for MDFPP [S]
+on property:vold.decrypt=trigger_restart_framework
+    restart logcat-ccaudit
+
+on property:vold.encrypt_progress=0
+    restart logcat-ccaudit
+
+service logcat-ccaudit /system/bin/sh /system/bin/logger_ccaudit.sh
+    class main
+    disabled
+    oneshot
+    seclabel u:r:log_services:s0
+
+on property:persist.service.ccaudit.enable=6
+    restart logcat-ccaudit
+
+on property:persist.service.ccaudit.enable=5
+    restart logcat-ccaudit
+
+on property:persist.service.ccaudit.enable=4
+    restart logcat-ccaudit
+
+on property:persist.service.ccaudit.enable=3
+    restart logcat-ccaudit
+
+on property:persist.service.ccaudit.enable=2
+    restart logcat-ccaudit
+
+on property:persist.service.ccaudit.enable=1
+    restart logcat-ccaudit
+
+on property:persist.service.ccaudit.enable=0
+    stop logcat-ccaudit
+# Enable CC Audit for MDFPP [E]
+
+service chmod_dp /system/bin/sh /system/etc/change_permission_preload.sh
+    disabled
+    oneshot

@@ -179,6 +179,7 @@ dalvik.vm.dex2oat-filter         u:object_r:dalvik_dex2oat_prop:s0
 dalvik.vm.image-dex2oat-filter   u:object_r:dalvik_dex2oat_prop:s0
 dev.bootcomplete       u:object_r:minios_prop:s0
 fota.log                         u:object_r:fota_prop:s0
+frstd.ctrl.run            u:object_r:frstd_prop:s0
 fw.max_users              u:object_r:multiuser_prop:s0
 hw.camcorder.fpsrange     u:object_r:camcorder_prop:s0
 iq.cadet.ip             u:object_r:iq_cadet_ip_prop:s0
@@ -301,7 +302,8 @@ wlan.monitor.status             u:object_r:wifi_prop:s0
 
 # mdfpp prop
 persist.service.ccaudit.enable  u:object_r:mdfpp_prop:s0
-ro.sys.openssl.selftest.status  u:object_r:mdfpp_prop:s0
+sys.bc.selftest.status       u:object_r:mdfpp_prop:s0
+sys.openssl.selftest.status  u:object_r:mdfpp_prop:s0
 #line 1 "device/lge/common/sepolicy/qcom/property_contexts"
 # thermald prop
 persist.sys.thermald_miti_off  u:object_r:thermald_prop:s0

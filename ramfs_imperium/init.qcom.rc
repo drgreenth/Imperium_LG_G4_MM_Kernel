@@ -294,13 +294,6 @@ on post-fs-data
     chmod 2770 /data/system/perfd
 
 # TODO: This MUST be disabled not use 'qcom system daemon' in LGE platform.
-service qfintverify /sbin/qfintverify
-    user root
-    class core
-    seclabel u:r:qfips:s0
-    oneshot
-
-# TODO: This MUST be disabled not use 'qcom system daemon' in LGE platform.
 #service qcomsysd /system/bin/qcom-system-daemon
 #    class main
 #    user root
@@ -313,6 +306,11 @@ service qfintverify /sbin/qfintverify
     mkdir /data/misc/SelfHost/storage/ 0700 system shell
     mkdir /data/misc/SelfHost/Running/ 2750 system shell
 
+service qfintverify /sbin/qfintverify
+    user root
+    class core
+    seclabel u:r:qfips:s0
+    oneshot
 
 service ssr_setup /system/bin/ssr_setup
     oneshot

@@ -284,6 +284,9 @@ on post-fs-data
     mkdir /data/bootchart 0755 shell shell
     bootchart_init
 
+    # It guarantees that entropy.dat copies to /dev/urandom,
+    # after /dev/urandom was mknod.
+    wait /dev/urandom
     # Avoid predictable entropy pool. Carry over entropy from previous boot.
     copy /data/system/entropy.dat /dev/urandom
 
