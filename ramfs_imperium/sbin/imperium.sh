@@ -38,9 +38,8 @@ $BB rm -rf /data/tombstones/* 2> /dev/null;
 # vm tweaks
 busybox sysctl -w vm.laptop_mode=0
 busybox sysctl -w vm.swappiness=0
-busybox sysctl -w vm.vfs_cache_pressure=70
-busybox sysctl -w vm.dirty_background_ratio=5
-busybox sysctl -w vm.dirty_ratio=10
+busybox sysctl -w vm.dirty_background_ratio=10
+busybox sysctl -w vm.dirty_ratio=30
 
 # setprop
 setprop persist.adb.notify 0
