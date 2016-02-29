@@ -41,7 +41,7 @@ ls -lh $RAMFS.cpio
 gzip -9 $RAMFS.cpio
 cd $KERNELDIR
 
-./scripts/mkbootimg --kernel $IMAGE/Image --ramdisk $IMPERIUM/Imperium_ramdisk_H815.cpio.gz --base 0x00000000 --pagesize 4096 --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 00000100 --cmdline 'console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 user_debug=31 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.selinux=permissive msm_rtb.filter=0x37 boot_cpus=0-5 androidboot.hardware=p1' --dt dt.img -o $BUILDEDKERNEL/Builded_Kernel/boot.img
+./scripts/mkbootimg --kernel $IMAGE/Image --ramdisk $IMPERIUM/Imperium_ramdisk_H815.cpio.gz --base 0x00000000 --pagesize 4096 --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --cmdline 'console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 user_debug=31 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.selinux=permissive msm_rtb.filter=0x37 boot_cpus=0-5 androidboot.hardware=p1' --dt dt.img -o $BUILDEDKERNEL/Builded_Kernel/boot.img
 
 rm -rf imperium_install
 mkdir -p imperium_install
