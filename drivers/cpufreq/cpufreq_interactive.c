@@ -45,6 +45,8 @@ struct cpufreq_loadinfo {
 static DEFINE_PER_CPU(struct cpufreq_loadinfo, cpuloadinfo);
 #endif
 
+extern bool mdss_screen_on;
+
 struct cpufreq_interactive_policyinfo {
 	struct timer_list policy_timer;
 	struct timer_list policy_slack_timer;
@@ -104,6 +106,8 @@ static unsigned int default_above_hispeed_delay[] = {
 #define DEFAULT_GPU_RANGE_ENTER_TIME	1000000
 #define DEFAULT_GPU_RANGE_OUT_TIME		500000
 #define DEFAULT_GPU_MAX_FREQ			0
+#define DEFAULT_SCREEN_OFF_MAX 1555200
+static unsigned long screen_off_max = DEFAULT_SCREEN_OFF_MAX;
 
 unsigned int change_target_load = 0;
 u64 gpu_busytime = 0ULL;
@@ -632,12 +636,9 @@ static void cpufreq_interactive_timer(unsigned long data)
 		}
 	} else {
 		new_freq = choose_freq(ppol, loadadjfreq);
-<<<<<<< HEAD
 		if (new_freq > tunables->hispeed_freq &&
 				ppol->target_freq < tunables->hispeed_freq)
 			new_freq = tunables->hispeed_freq;
-=======
->>>>>>> parent of 3183d21... cpufreq: interactive: prevents the frequency to directly raise above the
 	}
 
 	if (cpu_load <= MAX_LOCAL_LOAD &&
@@ -762,6 +763,7 @@ static int cpufreq_interactive_speedchange_task(void *data)
 		spin_unlock_irqrestore(&speedchange_cpumask_lock, flags);
 
 		for_each_cpu(cpu, &tmp_mask) {
+			unsigned int max_freq = 0;
 			ppol = per_cpu(polinfo, cpu);
 			if (!down_read_trylock(&ppol->enable_sem))
 				continue;
@@ -769,6 +771,11 @@ static int cpufreq_interactive_speedchange_task(void *data)
 				up_read(&ppol->enable_sem);
 				continue;
 			}
+
+			max_freq = ppol->target_freq;
+			if (unlikely(!mdss_screen_on))
+				if (ppol->target_freq > screen_off_max) 
+					max_freq = screen_off_max;
 
 			if (ppol->target_freq != ppol->policy->cur)
 #ifdef CONFIG_LGE_LBFC
@@ -781,11 +788,11 @@ static int cpufreq_interactive_speedchange_task(void *data)
 			}
 #else
 				__cpufreq_driver_target(ppol->policy,
-							ppol->target_freq,
+							max_freq,
 							CPUFREQ_RELATION_H);
 #endif
 			trace_cpufreq_interactive_setspeed(cpu,
-						     ppol->target_freq,
+						     max_freq,
 						     ppol->policy->cur);
 			up_read(&ppol->enable_sem);
 		}
@@ -1241,6 +1248,25 @@ static ssize_t store_boostpulse_duration(struct cpufreq_interactive_tunables
 	return count;
 }
 
+static ssize_t show_screen_off_maxfreq(struct cpufreq_interactive_tunables *tunables,
+                char *buf)
+{
+	return sprintf(buf, "%lu\n", screen_off_max);
+}
+
+static ssize_t store_screen_off_maxfreq(struct cpufreq_interactive_tunables *tunables,
+                const char *buf, size_t count)
+{
+	int ret;
+	unsigned long val;
+
+	ret = strict_strtoul(buf, 0, &val);
+	if (ret < 0) return ret;
+	if (val < 384000) screen_off_max = DEFAULT_SCREEN_OFF_MAX;
+	else screen_off_max = val;
+	return count;
+}
+
 static ssize_t show_io_is_busy(struct cpufreq_interactive_tunables *tunables,
 		char *buf)
 {
@@ -1618,7 +1644,7 @@ show_store_gov_pol_sys(gpu_range_end_freq);
 show_store_gov_pol_sys(gpu_range_enter_time);
 show_store_gov_pol_sys(gpu_range_out_time);
 show_store_gov_pol_sys(gpu_max_freq);
-
+show_store_gov_pol_sys(screen_off_maxfreq);
 
 #define gov_sys_attr_rw(_name)						\
 static struct global_attr _name##_gov_sys =				\
@@ -1653,7 +1679,7 @@ gov_sys_pol_attr_rw(gpu_range_end_freq);
 gov_sys_pol_attr_rw(gpu_range_enter_time);
 gov_sys_pol_attr_rw(gpu_range_out_time);
 gov_sys_pol_attr_rw(gpu_max_freq);
-
+gov_sys_pol_attr_rw(screen_off_maxfreq);
 
 static struct global_attr boostpulse_gov_sys =
 	__ATTR(boostpulse, 0200, NULL, store_boostpulse_gov_sys);
@@ -1692,6 +1718,7 @@ static struct attribute *interactive_attributes_gov_sys[] = {
 	&gpu_range_enter_time_gov_sys.attr,
 	&gpu_range_out_time_gov_sys.attr,
 	&gpu_max_freq_gov_sys.attr,
+	&screen_off_maxfreq_gov_sys.attr,
 	NULL,
 };
 
@@ -1725,6 +1752,7 @@ static struct attribute *interactive_attributes_gov_pol[] = {
 	&gpu_range_enter_time_gov_pol.attr,
 	&gpu_range_out_time_gov_pol.attr,
 	&gpu_max_freq_gov_pol.attr,
+	&screen_off_maxfreq_gov_pol.attr,
 	NULL,
 };
 
@@ -2047,6 +2075,8 @@ struct cpufreq_governor cpufreq_gov_interactive = {
 static int __init cpufreq_interactive_init(void)
 {
 	struct sched_param param = { .sched_priority = MAX_RT_PRIO-1 };
+
+	mdss_screen_on = true;
 
 	spin_lock_init(&speedchange_cpumask_lock);
 	mutex_init(&gov_lock);

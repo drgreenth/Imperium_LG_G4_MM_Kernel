@@ -46,6 +46,8 @@ extern int mdss_dsi_cmdlist_rx(struct mdss_dsi_ctrl_pdata *ctrl,
 
 DEFINE_LED_TRIGGER(bl_led_trigger);
 
+bool mdss_screen_on = true;
+
 void mdss_dsi_panel_pwm_cfg(struct mdss_dsi_ctrl_pdata *ctrl)
 {
 	if (ctrl->pwm_pmi)
@@ -685,6 +687,8 @@ static int mdss_dsi_panel_on(struct mdss_panel_data *pdata)
 		return -EINVAL;
 	}
 
+	mdss_screen_on = true;
+
 	pinfo = &pdata->panel_info;
 	ctrl = container_of(pdata, struct mdss_dsi_ctrl_pdata,
 				panel_data);
@@ -769,6 +773,8 @@ static int mdss_dsi_panel_off(struct mdss_panel_data *pdata)
 	if (lge_mdss_dsi.post_mdss_dsi_panel_off)
 		lge_mdss_dsi.post_mdss_dsi_panel_off(pdata);
 #endif
+
+mdss_screen_on = false;
 
 end:
 	pinfo->blank_state = MDSS_PANEL_BLANK_BLANK;
