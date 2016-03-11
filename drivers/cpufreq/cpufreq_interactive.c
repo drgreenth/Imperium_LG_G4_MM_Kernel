@@ -632,9 +632,12 @@ static void cpufreq_interactive_timer(unsigned long data)
 		}
 	} else {
 		new_freq = choose_freq(ppol, loadadjfreq);
+<<<<<<< HEAD
 		if (new_freq > tunables->hispeed_freq &&
 				ppol->target_freq < tunables->hispeed_freq)
 			new_freq = tunables->hispeed_freq;
+=======
+>>>>>>> parent of 3183d21... cpufreq: interactive: prevents the frequency to directly raise above the
 	}
 
 	if (cpu_load <= MAX_LOCAL_LOAD &&
