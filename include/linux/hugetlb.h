@@ -269,6 +269,7 @@ struct page *alloc_huge_page_node(struct hstate *h, int nid);
 /* arch callback */
 int __init alloc_bootmem_huge_page(struct hstate *h);
 
+void __init hugetlb_bad_size(void);
 void __init hugetlb_add_hstate(unsigned order);
 struct hstate *size_to_hstate(unsigned long size);
 
