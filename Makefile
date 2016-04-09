@@ -378,7 +378,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
 		   -fno-delete-null-pointer-checks \
-		   -std=gnu89
+		   -std=gnu89 -fno-pic
 
 KBUILD_CFLAGS	+= -mcpu=cortex-a57.cortex-a53 -mtune=cortex-a57.cortex-a53
 # Other unnecessary warnings
