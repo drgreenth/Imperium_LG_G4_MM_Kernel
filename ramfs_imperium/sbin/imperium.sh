@@ -53,6 +53,13 @@ setprop power_supply.wakeup enable
 setprop power.saving.mode 1
 setprop ro.config.hw_power_saving 1
 
+# Stop LG logging to /data/logger/$FILE we dont need that. draning power.
+setprop persist.service.events.enable 0
+setprop persist.service.main.enable 0
+setprop persist.service.power.enable 0
+setprop persist.service.radio.enable 0
+setprop persist.service.system.enable 0
+
 # Google Services battery drain fixer by Alcolawl@xda
 # http://forum.xda-developers.com/google-nexus-5/general/script-google-play-services-battery-t3059585/post59563859
 pm enable com.google.android.gms/.update.SystemUpdateActivity
