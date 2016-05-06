@@ -3603,6 +3603,7 @@ static struct touch_platform_data *get_dts_data(struct device *dev)
 	GET_PROPERTY_U32(np, "need_upgrade", p_data->fw->need_upgrade);
 
 	/* Swipe Down/Up */
+	GET_PROPERTY_U32(np, "use_swp_down_gesture", p_data->swp_down_caps->use_gesture);
 	GET_PROPERTY_U32(np, "swp_down_min_distance", p_data->swp_down_caps->min_distance);
 	GET_PROPERTY_U32(np, "swp_down_ratio_thres", p_data->swp_down_caps->ratio_thres);
 	GET_PROPERTY_U32(np, "swp_down_ratio_chk_period", p_data->swp_down_caps->ratio_chk_period);
@@ -3624,6 +3625,7 @@ static struct touch_platform_data *get_dts_data(struct device *dev)
 	GET_PROPERTY_U32(np, "swp_down_active_area_x1_reg_offset", p_data->swp_down_caps->active_area_x1_reg_offset);
 	GET_PROPERTY_U32(np, "swp_down_active_area_y1_reg_offset", p_data->swp_down_caps->active_area_y1_reg_offset);
 
+	GET_PROPERTY_U32(np, "use_swp_up_gesture", p_data->swp_up_caps->use_gesture);
 	GET_PROPERTY_U32(np, "swp_up_min_distance", p_data->swp_up_caps->min_distance);
 	GET_PROPERTY_U32(np, "swp_up_ratio_thres", p_data->swp_up_caps->ratio_thres);
 	GET_PROPERTY_U32(np, "swp_up_ratio_chk_period", p_data->swp_up_caps->ratio_chk_period);

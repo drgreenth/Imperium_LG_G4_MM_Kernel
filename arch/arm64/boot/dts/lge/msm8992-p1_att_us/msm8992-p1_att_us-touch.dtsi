@@ -12,3 +12,8 @@
 
 #include "../msm8992-touch-synaptics-s3528.dtsi"
 
+&i2c_2 {
+	synaptics@20 {
+		use_swp_down_gesture = <0>;
+	};
+};

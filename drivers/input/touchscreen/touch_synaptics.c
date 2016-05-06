@@ -5518,9 +5518,12 @@ static int get_swipe_info(struct synaptics_ts_data *ts)
 	}
 
 	if (swp->support_swipe & SUPPORT_SWIPE_DOWN) {
-		swp->swipe_mode |= SWIPE_DOWN_BIT;
+		if (ts->pdata->swp_down_caps->use_gesture) {
+			swp->swipe_mode |= SWIPE_DOWN_BIT;
+		}
+
 		swp->down.enable_mask = SWIPE_DOWN_BIT;
-		swp->down.min_distance =  ts->pdata->swp_down_caps->min_distance;
+		swp->down.min_distance = ts->pdata->swp_down_caps->min_distance;
 		swp->down.ratio_thres = ts->pdata->swp_down_caps->ratio_thres;
 		swp->down.ratio_chk_period = ts->pdata->swp_down_caps->ratio_chk_period;
 		swp->down.ratio_chk_min_distance = ts->pdata->swp_down_caps->ratio_chk_min_distance;
@@ -5543,7 +5546,10 @@ static int get_swipe_info(struct synaptics_ts_data *ts)
 	}
 
 	if (swp->support_swipe & SUPPORT_SWIPE_UP) {
-		/* swp->swipe_mode |= SWIPE_UP_BIT; */
+		if (ts->pdata->swp_up_caps->use_gesture) {
+			swp->swipe_mode |= SWIPE_UP_BIT;
+		}
+
 		swp->up.enable_mask = SWIPE_UP_BIT;
 		swp->up.min_distance = ts->pdata->swp_up_caps->min_distance;
 		swp->up.ratio_thres = ts->pdata->swp_up_caps->ratio_thres;

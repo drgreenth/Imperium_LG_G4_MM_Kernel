@@ -101,6 +101,7 @@ struct crack_role {
 };
 
 struct swp_caps {
+	u32 use_gesture;
 	u32 min_distance;
 	u32 ratio_thres;
 	u32 ratio_chk_period;
