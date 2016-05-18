@@ -5120,6 +5120,7 @@ static irqreturn_t vbat_low_handler(int irq, void *_chip)
 static irqreturn_t chg_error_handler(int irq, void *_chip)
 {
 	struct smbchg_chip *chip = _chip;
+	u8 reg = 0;
 
 	pr_smb(PR_INTERRUPT, "chg-error triggered\n");
 	smbchg_parallel_usb_check_ok(chip);
@@ -5127,6 +5128,15 @@ static irqreturn_t chg_error_handler(int irq, void *_chip)
 		power_supply_changed(&chip->batt_psy);
 	smbchg_charging_status_change(chip);
 	smbchg_wipower_check(chip);
+
+	/* Clear OV and restart charging by disable/enable charging */
+	smbchg_read(chip, &reg, chip->bat_if_base + RT_STS, 1);
+	if (reg & BAT_OV_BIT) {
+		smbchg_charging_en(chip, false);
+		msleep(200);
+		smbchg_charging_en(chip, true);
+	}
+
 	return IRQ_HANDLED;
 }
 
