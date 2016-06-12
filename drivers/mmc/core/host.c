@@ -724,7 +724,8 @@ static ssize_t store_scale_down_in_low_wr_load(struct device *dev,
 
 	host->clk_scaling.scale_down_in_low_wr_load = value;
 
-	return count;
+return count;
+
 }
 
 static ssize_t show_up_threshold(struct device *dev,
