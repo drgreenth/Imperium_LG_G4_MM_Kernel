@@ -14,7 +14,7 @@ KERNELDIR="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_Kernel"
 BUILDEDKERNEL="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_Kernel/1_Imperium"
 IMAGE="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_Kernel/arch/arm64/boot"
 RAMFS="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_ramdisk_H815"
-VERSION=3.0
+VERSION=3.1
 
 find -name '*.dtb' -exec rm -rf {} \;
 find -name '*.ko' -exec rm -rf {} \;
