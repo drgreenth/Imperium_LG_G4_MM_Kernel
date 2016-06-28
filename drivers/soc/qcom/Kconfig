@@ -660,10 +660,6 @@ config BRICKED_HOTPLUG
 	help
 	 This enables kernel based multi core control.
 
-config STATE_NOTIFIER
-        bool "State Notifier"
-	default n
-
 source "drivers/soc/qcom/memshare/Kconfig"
 
 source "drivers/soc/qcom/lge/Kconfig"
