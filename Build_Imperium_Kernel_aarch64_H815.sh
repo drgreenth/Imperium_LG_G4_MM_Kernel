@@ -4,16 +4,16 @@ export PARENT_DIR=`readlink -f ..`
 export ARCH=arm64
 export SUBARCH=arm64
 #export PATH=/home/slim80/Scrivania/Kernel/Compilatori/aarch64-linux-android-4.9/bin:$PATH
-export PATH=/home/slim80/Scrivania/Kernel/Compilatori/UBERTC-aarch64-linux-android-4.9-kernel/bin:$PATH
+export PATH=/work/antero/ubertc/UBERTC-aarch64-linux-android-4.9-kernel/bin:$PATH
 export CROSS_COMPILE=aarch64-linux-android-
-export TARGET_PREBUILT_KERNEL=/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_Kernel/arch/arm64/boot/Image.gz-dtb
+export TARGET_PREBUILT_KERNEL=/work/antero/imperium/Imperium_LG_G4_MM_Kernel/arch/arm64/boot/Image.gz-dtb
 export KCONFIG_NOTIMESTAMP=true
 
-IMPERIUM="/home/slim80/Scrivania/Kernel/LG/Imperium"
-KERNELDIR="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_Kernel"
-BUILDEDKERNEL="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_Kernel/1_Imperium"
-IMAGE="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_Kernel/arch/arm64/boot"
-RAMFS="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_ramdisk_H815"
+IMPERIUM="/work/antero/imperium"
+KERNELDIR="/work/antero/imperium/Imperium_LG_G4_MM_Kernel"
+BUILDEDKERNEL="/work/antero/imperium/Imperium_LG_G4_MM_Kernel/final"
+IMAGE="/work/antero/imperium/Imperium_LG_G4_MM_Kernel/arch/arm64/boot"
+RAMFS="/work/antero/imperium/Imperium_ramdisk_H815"
 VERSION=3.3
 
 find -name '*.dtb' -exec rm -rf {} \;

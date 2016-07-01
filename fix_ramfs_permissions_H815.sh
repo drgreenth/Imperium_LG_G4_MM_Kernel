@@ -1,5 +1,5 @@
 #!/bin/sh
-RAMFS="/home/slim80/Scrivania/Kernel/LG/Imperium/Imperium_ramdisk_H815"
+RAMFS="/work/antero/imperium/Imperium_ramdisk_H815"
 chmod -R g-w $RAMFS/*
 chmod g-w $RAMFS/*.rc $RAMFS/default.prop $RAMFS/sbin/*.sh
 cd $RAMFS
